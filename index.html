@@ -55,11 +55,11 @@
                     attendeeDetails = {
                         name: line.split(': ')[1].trim()
                     };
-                } else if (line.startsWith('- **Pax**:')) {
+                } else if (line.trim().startsWith('- **Pax**:')) {
                     attendeeDetails.pax = line.split(': ')[1].trim();
-                } else if (line.startsWith('- **Status**:')) {
+                } else if (line.trim().startsWith('- **Status**:')) {
                     attendeeDetails.status = line.split(': ')[1].trim();
-                } else if (line.startsWith('- **Comment**:')) {
+                } else if (line.trim().startsWith('- **Comment**:')) {
                     attendeeDetails.comment = line.split(': ')[1].trim();
                 }
             });
