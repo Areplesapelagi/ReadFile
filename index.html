@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Attendees</title>
+</head>
+<body>
+    <form id="attendee-form">
+        <label>Your Full Name</label>
+        <input type="text" name="name" required><br>
+        <label>Pax</label>
+        <input type="number" name="pax" required><br>
+        <label>Phone Number</label>
+        <input type="text" name="phone" required><br>
+        <label>Comment</label>
+        <textarea name="comment"></textarea><br>
+        <label>Status</label>
+        <select name="status">
+            <option value="Going">Going</option>
+            <option value="Maybe">Maybe</option>
+            <option value="Not Going">Not Going</option>
+        </select><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('attendee-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = {
+                content: `### Attendee: ${formData.get('name')}
+- **Pax**: ${formData.get('pax')}
+- **Phone**: ${formData.get('phone')}
+- **Comment**: ${formData.get('comment')}
+- **Status**: ${formData.get('status')}`
+            };
+
+            await fetch('/update-md', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            alert('Attendee updated!');
+        });
+    </script>
+</body>
+</html>
