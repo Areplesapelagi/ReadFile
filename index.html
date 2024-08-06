@@ -7,13 +7,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>Attendees List</h1>
     <div class="container">
-        <h1>Attendees List</h1>
-        <h2>Going</h2>
-        <div id="going-attendees"></div>
-        <h2>Not Going</h2>
-        <div id="not-going-attendees"></div>
-
         <h2>Statistics</h2>
         <p><strong>Total Going:</strong> <span id="total-going">0</span></p>
         <p><strong>Total Not Going:</strong> <span id="total-not-going">0</span></p>
@@ -42,17 +37,36 @@
         </div>
     </div>
 
+    <!-- Popup for Attendees List -->
+    <div id="attendees-popup" class="popup">
+        <div class="popup-content">
+            <button class="close-btn" onclick="toggleAttendeesPopup()">Close</button>
+            <h2>Attendees List</h2>
+            <h3>Going</h3>
+            <div id="going-attendees"></div>
+            <h3>Not Going</h3>
+            <div id="not-going-attendees"></div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <div class="footer">
         <button onclick="togglePopup()">Add Attendee</button>
+        <button onclick="toggleAttendeesPopup()">View Attendees List</button>
     </div>
 
     <!-- Inline Script for Popup Functionality -->
     <script>
-        // Toggle popup visibility
+        // Toggle popup visibility for Add Attendee
         function togglePopup() {
             const popup = document.getElementById('popup');
             popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Toggle popup visibility for Attendees List
+        function toggleAttendeesPopup() {
+            const attendeesPopup = document.getElementById('attendees-popup');
+            attendeesPopup.style.display = attendeesPopup.style.display === 'flex' ? 'none' : 'flex';
         }
     </script>
 
