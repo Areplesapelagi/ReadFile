@@ -44,8 +44,14 @@
     <div class="footer">
         <button onclick="togglePopup()">Add Attendee</button>
     </div>
-
+  <script>
+        // Toggle popup visibility
+        function togglePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
     <!-- Script -->
-    <script src="scripts.js"></script>
+    <script type="module" src="scripts.js"></script>
 </body>
 </html>
