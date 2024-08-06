@@ -36,30 +36,44 @@
             const container = document.getElementById('attendees-container');
             const lines = markdown.split('\n');
             let html = '';
-            let currentName = '';
-            
+            let attendeeDetails = {};
+
             lines.forEach(line => {
                 if (line.startsWith('- **Name**:')) {
-                    if (currentName) {
-                        html += '</div>';
+                    if (attendeeDetails.name) {
+                        // Add the previously collected attendee details to HTML
+                        html += `
+                            <div class="attendee">
+                                <h3>${attendeeDetails.name}</h3>
+                                <p><strong>Pax:</strong> ${attendeeDetails.pax || 'N/A'}</p>
+                                <p><strong>Status:</strong> ${attendeeDetails.status || 'N/A'}</p>
+                                <p><strong>Comment:</strong> ${attendeeDetails.comment || 'N/A'}</p>
+                            </div>
+                        `;
                     }
-                    currentName = line.split(': ')[1].trim();
-                    html += `<div class="attendee">
-                        <h3>${currentName}</h3>`;
+                    // Start a new attendee
+                    attendeeDetails = {
+                        name: line.split(': ')[1].trim()
+                    };
                 } else if (line.startsWith('- **Pax**:')) {
-                    const pax = line.split(': ')[1].trim();
-                    html += `<p><strong>Pax:</strong> ${pax}</p>`;
+                    attendeeDetails.pax = line.split(': ')[1].trim();
                 } else if (line.startsWith('- **Status**:')) {
-                    const status = line.split(': ')[1].trim();
-                    html += `<p><strong>Status:</strong> ${status}</p>`;
+                    attendeeDetails.status = line.split(': ')[1].trim();
                 } else if (line.startsWith('- **Comment**:')) {
-                    const comment = line.split(': ')[1].trim();
-                    html += `<p><strong>Comment:</strong> ${comment}</p>`;
+                    attendeeDetails.comment = line.split(': ')[1].trim();
                 }
             });
 
-            if (currentName) {
-                html += '</div>';
+            // Add the last collected attendee details to HTML
+            if (attendeeDetails.name) {
+                html += `
+                    <div class="attendee">
+                        <h3>${attendeeDetails.name}</h3>
+                        <p><strong>Pax:</strong> ${attendeeDetails.pax || 'N/A'}</p>
+                        <p><strong>Status:</strong> ${attendeeDetails.status || 'N/A'}</p>
+                        <p><strong>Comment:</strong> ${attendeeDetails.comment || 'N/A'}</p>
+                    </div>
+                `;
             }
 
             container.innerHTML = html;
