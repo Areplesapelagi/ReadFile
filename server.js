@@ -8,9 +8,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // GitHub configuration
-const GITHUB_TOKEN = 'YOUR_GITHUB_TOKEN';
-const REPO_OWNER = 'YOUR_GITHUB_USERNAME';
-const REPO_NAME = 'YOUR_REPO_NAME';
+const GITHUB_TOKEN = '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';
+const REPO_OWNER = 'Areplesapelagi';
+const REPO_NAME = 'ReadFile';
 const FILE_PATH = 'attendees.md'; // Path to the file in the repo
 const BRANCH = 'main'; // Branch to update
 
