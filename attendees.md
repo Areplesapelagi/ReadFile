@@ -9,3 +9,7 @@
   - **Status**: Not Going
   - **Comment**: Unable to attend due to prior commitment.
 
+- **Name**: Ariff Hazmi
+  - **Pax**: 5
+  - **Status**: Going
+  - **Comment**: Congrats!
