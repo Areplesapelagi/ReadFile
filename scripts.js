@@ -51,7 +51,7 @@ function togglePopup() {
 // Load attendees from Firestore
 async function loadAttendees() {
     const goingContainer = document.getElementById('going-attendees');
-    const notGoingContainer = document.getElementById('not-going-attendees');
+    //const notGoingContainer = document.getElementById('not-going-attendees');
     const totalGoingElem = document.getElementById('total-going');
     const totalNotGoingElem = document.getElementById('total-not-going');
     const totalPaxElem = document.getElementById('total-pax');
