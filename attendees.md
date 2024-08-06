@@ -13,3 +13,8 @@
   - **Pax**: 5
   - **Status**: Going
   - **Comment**: Congrats!
+ 
+- **Name**: Ariff Hazmi
+  - **Pax**: 5
+  - **Status**: Going
+  - **Comment**: Congrats!
