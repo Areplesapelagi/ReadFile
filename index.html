@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Attendees List</h1>
-    <h2>Going</h2>
-    <div id="going-attendees"></div>
-    <h2>Not Going</h2>
-    <div id="not-going-attendees"></div>
+    <div class="container">
+        <h1>Attendees List</h1>
+        <h2>Going</h2>
+        <div id="going-attendees"></div>
+        <h2>Not Going</h2>
+        <div id="not-going-attendees"></div>
 
-    <h2>Statistics</h2>
-    <p><strong>Total Going:</strong> <span id="total-going">0</span></p>
-    <p><strong>Total Not Going:</strong> <span id="total-not-going">0</span></p>
-    <p><strong>Total Pax:</strong> <span id="total-pax">0</span></p>
+        <h2>Statistics</h2>
+        <p><strong>Total Going:</strong> <span id="total-going">0</span></p>
+        <p><strong>Total Not Going:</strong> <span id="total-not-going">0</span></p>
+        <p><strong>Total Pax:</strong> <span id="total-pax">0</span></p>
+    </div>
 
     <!-- Popup Form -->
     <div id="popup" class="popup">
@@ -44,14 +46,17 @@
     <div class="footer">
         <button onclick="togglePopup()">Add Attendee</button>
     </div>
-  <script>
+
+    <!-- Inline Script for Popup Functionality -->
+    <script>
         // Toggle popup visibility
         function togglePopup() {
             const popup = document.getElementById('popup');
             popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
         }
     </script>
-    <!-- Script -->
+
+    <!-- Script for Firebase and Attendee Management -->
     <script type="module" src="scripts.js"></script>
 </body>
 </html>
