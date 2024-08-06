@@ -25,6 +25,7 @@
     <div id="counters">
         <p><strong>Going:</strong> <span id="going-count">0</span></p>
         <p><strong>Not Going:</strong> <span id="not-going-count">0</span></p>
+        <p><strong>Total Pax:</strong> <span id="total-pax">0</span></p>
     </div>
     <div id="attendees-container"></div>
 
@@ -43,11 +44,13 @@
             const container = document.getElementById('attendees-container');
             const goingCountElem = document.getElementById('going-count');
             const notGoingCountElem = document.getElementById('not-going-count');
+            const totalPaxElem = document.getElementById('total-pax');
             const lines = markdown.split('\n');
             let html = '';
             let attendeeDetails = {};
             let goingCount = 0;
             let notGoingCount = 0;
+            let totalPax = 0;
 
             lines.forEach(line => {
                 if (line.startsWith('- **Name**:')) {
@@ -67,6 +70,8 @@
                         } else if (attendeeDetails.status === 'Not Going') {
                             notGoingCount++;
                         }
+                        // Add Pax to totalPax
+                        totalPax += parseInt(attendeeDetails.pax, 10) || 0;
                     }
                     // Start a new attendee
                     attendeeDetails = {
@@ -97,11 +102,14 @@
                 } else if (attendeeDetails.status === 'Not Going') {
                     notGoingCount++;
                 }
+                // Add Pax to totalPax
+                totalPax += parseInt(attendeeDetails.pax, 10) || 0;
             }
 
             container.innerHTML = html;
             goingCountElem.textContent = goingCount;
             notGoingCountElem.textContent = notGoingCount;
+            totalPaxElem.textContent = totalPax;
         }
 
         fetchMarkdown();
