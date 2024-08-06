@@ -15,10 +15,17 @@
         .attendee h3 {
             margin: 0;
         }
+        #counters {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <h1>Attendees List</h1>
+    <div id="counters">
+        <p><strong>Going:</strong> <span id="going-count">0</span></p>
+        <p><strong>Not Going:</strong> <span id="not-going-count">0</span></p>
+    </div>
     <div id="attendees-container"></div>
 
     <script>
@@ -34,9 +41,13 @@
 
         function displayContent(markdown) {
             const container = document.getElementById('attendees-container');
+            const goingCountElem = document.getElementById('going-count');
+            const notGoingCountElem = document.getElementById('not-going-count');
             const lines = markdown.split('\n');
             let html = '';
             let attendeeDetails = {};
+            let goingCount = 0;
+            let notGoingCount = 0;
 
             lines.forEach(line => {
                 if (line.startsWith('- **Name**:')) {
@@ -50,6 +61,12 @@
                                 <p><strong>Comment:</strong> ${attendeeDetails.comment || 'N/A'}</p>
                             </div>
                         `;
+                        // Increment the counter based on status
+                        if (attendeeDetails.status === 'Going') {
+                            goingCount++;
+                        } else if (attendeeDetails.status === 'Not Going') {
+                            notGoingCount++;
+                        }
                     }
                     // Start a new attendee
                     attendeeDetails = {
@@ -74,9 +91,17 @@
                         <p><strong>Comment:</strong> ${attendeeDetails.comment || 'N/A'}</p>
                     </div>
                 `;
+                // Increment the counter based on status
+                if (attendeeDetails.status === 'Going') {
+                    goingCount++;
+                } else if (attendeeDetails.status === 'Not Going') {
+                    notGoingCount++;
+                }
             }
 
             container.innerHTML = html;
+            goingCountElem.textContent = goingCount;
+            notGoingCountElem.textContent = notGoingCount;
         }
 
         fetchMarkdown();
