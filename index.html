@@ -33,12 +33,13 @@
     <p><strong>Total Pax:</strong> <span id="total-pax">0</span></p>
 
     <!-- Firebase App (the core Firebase SDK) -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <!-- Firebase Firestore -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-    <script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
+
         // Your Firebase configuration
-        const firebaseConfig = {
+       const firebaseConfig = {
   apiKey: "AIzaSyAUcAdcSR2jIiDWI3J_Wa78Xiy-saqMU78",
   authDomain: "rsvp-daacd.firebaseapp.com",
   projectId: "rsvp-daacd",
@@ -46,11 +47,10 @@
   messagingSenderId: "257111835647",
   appId: "1:257111835647:web:51b0d155e48363713eddca",
   measurementId: "G-5ZWXHTGDPG"
-};
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
         // Handle form submission
         document.getElementById('attendee-form').addEventListener('submit', async function(event) {
@@ -62,7 +62,7 @@
             const comment = document.getElementById('comment').value;
 
             try {
-                await db.collection('attendees').add({
+                await addDoc(collection(db, 'attendees'), {
                     name,
                     pax: parseInt(pax, 10),
                     status,
@@ -92,8 +92,8 @@
             let totalPax = 0;
 
             try {
-                const snapshot = await db.collection('attendees').get();
-                snapshot.forEach(doc => {
+                const querySnapshot = await getDocs(collection(db, 'attendees'));
+                querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     const attendeeHTML = `
                         <div>
