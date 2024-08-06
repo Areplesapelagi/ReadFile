@@ -4,24 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attendees List</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Attendees List</h1>
-    <form id="attendee-form">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
-        <label for="pax">Pax:</label>
-        <input type="number" id="pax" name="pax" required><br><br>
-        <label for="status">Status:</label>
-        <select id="status" name="status" required>
-            <option value="Going">Going</option>
-            <option value="Not Going">Not Going</option>
-        </select><br><br>
-        <label for="comment">Comment:</label>
-        <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br><br>
-        <button type="submit">Submit</button>
-    </form>
-
     <h2>Going</h2>
     <div id="going-attendees"></div>
     <h2>Not Going</h2>
@@ -32,98 +18,34 @@
     <p><strong>Total Not Going:</strong> <span id="total-not-going">0</span></p>
     <p><strong>Total Pax:</strong> <span id="total-pax">0</span></p>
 
-    <!-- Firebase App (the core Firebase SDK) -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
+    <!-- Popup Form -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <button class="close-btn" onclick="togglePopup()">Close</button>
+            <h2>Add Attendee</h2>
+            <form id="attendee-form-popup">
+                <label for="name-popup">Name:</label>
+                <input type="text" id="name-popup" name="name" required><br><br>
+                <label for="pax-popup">Pax:</label>
+                <input type="number" id="pax-popup" name="pax" required><br><br>
+                <label for="status-popup">Status:</label>
+                <select id="status-popup" name="status" required>
+                    <option value="Going">Going</option>
+                    <option value="Not Going">Not Going</option>
+                </select><br><br>
+                <label for="comment-popup">Comment:</label>
+                <textarea id="comment-popup" name="comment" rows="4" cols="50"></textarea><br><br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
 
-        // Your Firebase configuration
-       const firebaseConfig = {
-  apiKey: "AIzaSyAUcAdcSR2jIiDWI3J_Wa78Xiy-saqMU78",
-  authDomain: "rsvp-daacd.firebaseapp.com",
-  projectId: "rsvp-daacd",
-  storageBucket: "rsvp-daacd.appspot.com",
-  messagingSenderId: "257111835647",
-  appId: "1:257111835647:web:51b0d155e48363713eddca",
-  measurementId: "G-5ZWXHTGDPG"
-       };
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+    <!-- Footer -->
+    <div class="footer">
+        <button onclick="togglePopup()">Add Attendee</button>
+    </div>
 
-        // Handle form submission
-        document.getElementById('attendee-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const pax = document.getElementById('pax').value;
-            const status = document.getElementById('status').value;
-            const comment = document.getElementById('comment').value;
-
-            try {
-                await addDoc(collection(db, 'attendees'), {
-                    name,
-                    pax: parseInt(pax, 10),
-                    status,
-                    comment
-                });
-                alert('Attendee details submitted successfully!');
-                event.target.reset();
-                loadAttendees();
-            } catch (error) {
-                console.error('Error adding document: ', error);
-            }
-        });
-
-        // Load attendees from Firestore
-        async function loadAttendees() {
-            const goingContainer = document.getElementById('going-attendees');
-            const notGoingContainer = document.getElementById('not-going-attendees');
-            const totalGoingElem = document.getElementById('total-going');
-            const totalNotGoingElem = document.getElementById('total-not-going');
-            const totalPaxElem = document.getElementById('total-pax');
-
-            goingContainer.innerHTML = '';
-            notGoingContainer.innerHTML = '';
-
-            let totalGoing = 0;
-            let totalNotGoing = 0;
-            let totalPax = 0;
-
-            try {
-                const querySnapshot = await getDocs(collection(db, 'attendees'));
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const attendeeHTML = `
-                        <div>
-                            <h3>${data.name}</h3>
-                            <p><strong>Pax:</strong> ${data.pax || 'N/A'}</p>
-                            <p><strong>Comment:</strong> ${data.comment || 'N/A'}</p>
-                        </div>
-                    `;
-
-                    if (data.status === 'Going') {
-                        goingContainer.innerHTML += attendeeHTML;
-                        totalGoing++;
-                    } else if (data.status === 'Not Going') {
-                        notGoingContainer.innerHTML += attendeeHTML;
-                        totalNotGoing++;
-                    }
-
-                    totalPax += data.pax || 0;
-                });
-
-                totalGoingElem.textContent = totalGoing;
-                totalNotGoingElem.textContent = totalNotGoing;
-                totalPaxElem.textContent = totalPax;
-            } catch (error) {
-                console.error('Error fetching documents: ', error);
-            }
-        }
-
-        // Initial load
-        loadAttendees();
-    </script>
+    <!-- Script -->
+    <script type="module" src="scripts.js"></script>
 </body>
 </html>
