@@ -58,7 +58,6 @@ async function loadAttendees() {
 
     goingContainer.innerHTML = '';
    
-
     let totalGoing = 0;
     let totalNotGoing = 0;
     let totalPax = 0;
