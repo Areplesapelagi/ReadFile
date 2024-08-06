@@ -3,46 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Attendees</title>
+    <title>Attendees List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .attendee {
+            margin-bottom: 20px;
+        }
+        .attendee h3 {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    <form id="attendee-form">
-        <label>Your Full Name</label>
-        <input type="text" name="name" required><br>
-        <label>Pax</label>
-        <input type="number" name="pax" required><br>
-        <label>Phone Number</label>
-        <input type="text" name="phone" required><br>
-        <label>Comment</label>
-        <textarea name="comment"></textarea><br>
-        <label>Status</label>
-        <select name="status">
-            <option value="Going">Going</option>
-            <option value="Maybe">Maybe</option>
-            <option value="Not Going">Not Going</option>
-        </select><br>
-        <button type="submit">Submit</button>
-    </form>
+    <h1>Attendees List</h1>
+    <div id="attendees-container"></div>
 
     <script>
-        document.getElementById('attendee-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            const data = {
-                content: `### Attendee: ${formData.get('name')}
-- **Pax**: ${formData.get('pax')}
-- **Phone**: ${formData.get('phone')}
-- **Comment**: ${formData.get('comment')}
-- **Status**: ${formData.get('status')}`
-            };
+        async function fetchMarkdown() {
+            try {
+                const response = await fetch('attendees.md');
+                const text = await response.text();
+                displayContent(text);
+            } catch (error) {
+                console.error('Error fetching the markdown file:', error);
+            }
+        }
 
-            await fetch('/update-md', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+        function displayContent(markdown) {
+            const container = document.getElementById('attendees-container');
+            const lines = markdown.split('\n');
+            let html = '';
+            let currentName = '';
+            
+            lines.forEach(line => {
+                if (line.startsWith('- **Name**:')) {
+                    if (currentName) {
+                        html += '</div>';
+                    }
+                    currentName = line.split(': ')[1].trim();
+                    html += `<div class="attendee">
+                        <h3>${currentName}</h3>`;
+                } else if (line.startsWith('- **Pax**:')) {
+                    const pax = line.split(': ')[1].trim();
+                    html += `<p><strong>Pax:</strong> ${pax}</p>`;
+                } else if (line.startsWith('- **Status**:')) {
+                    const status = line.split(': ')[1].trim();
+                    html += `<p><strong>Status:</strong> ${status}</p>`;
+                } else if (line.startsWith('- **Comment**:')) {
+                    const comment = line.split(': ')[1].trim();
+                    html += `<p><strong>Comment:</strong> ${comment}</p>`;
+                }
             });
-            alert('Attendee updated!');
-        });
+
+            if (currentName) {
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        fetchMarkdown();
     </script>
 </body>
 </html>
