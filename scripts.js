@@ -51,43 +51,34 @@ function togglePopup() {
 // Load attendees from Firestore
 async function loadAttendees() {
     const goingContainer = document.getElementById('going-attendees');
-    const notGoingContainer = document.getElementById('not-going-attendees');
     const totalGoingElem = document.getElementById('total-going');
-    const totalNotGoingElem = document.getElementById('total-not-going');
     const totalPaxElem = document.getElementById('total-pax');
 
     goingContainer.innerHTML = '';
-    notGoingContainer.innerHTML = '';
    
     let totalGoing = 0;
-    let totalNotGoing = 0;
     let totalPax = 0;
 
     try {
         const querySnapshot = await getDocs(collection(db, 'attendees'));
         querySnapshot.forEach((doc) => {
             const data = doc.data();
-            const attendeeHTML = `
-                <div>
-                    <h3>${data.name}</h3>
-                    <p><strong>Pax:</strong> ${data.pax || 'N/A'}</p>
-                    <p><strong>Comment:</strong> ${data.comment || 'N/A'}</p>
-                </div>
-            `;
-
             if (data.status === 'Going') {
+                const attendeeHTML = `
+                    <div>
+                        <h3>${data.name}</h3>
+                        <p><strong>Pax:</strong> ${data.pax || 'N/A'}</p>
+                        <p><strong>Comment:</strong> ${data.comment || 'N/A'}</p>
+                    </div>
+                `;
+
                 goingContainer.innerHTML += attendeeHTML;
                 totalGoing++;
-            } else if (data.status === 'Not Going') {
-                notGoingContainer.innerHTML += attendeeHTML;
-                totalNotGoing++;
+                totalPax += data.pax || 0;
             }
-
-            totalPax += data.pax || 0;
         });
 
         totalGoingElem.textContent = totalGoing;
-        totalNotGoingElem.textContent = totalNotGoing;
         totalPaxElem.textContent = totalPax;
     } catch (error) {
         console.error('Error fetching documents: ', error);
