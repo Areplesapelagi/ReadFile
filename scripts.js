@@ -95,12 +95,6 @@ document.getElementById('attendee-form-popup').addEventListener('submit', async 
     }
 });
 
-// Toggle popup visibility
-function togglePopup() {
-    const popup = document.getElementById('popup');
-    popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
-}
-
 // Load attendees from Firestore
 async function loadAttendees() {
     const goingContainer = document.getElementById('going-attendees');
