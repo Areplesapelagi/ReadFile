@@ -1,3 +1,24 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const overlay = document.getElementById("overlay");
+    const mainContent = document.getElementById("main-content");
+    const openButton = document.getElementById("open-button");
+
+    // Ensure the overlay is visible and the main content is hidden on page load
+    overlay.style.display = "flex";
+    mainContent.style.display = "none";
+
+    openButton.addEventListener("click", function() {
+        overlay.style.transition = "opacity 0.5s ease"; // Apply a transition for the fade effect
+        overlay.style.opacity = "0"; // Start the fade out effect
+
+        // Wait for the transition to complete before hiding the overlay and showing the main content
+        setTimeout(function() {
+            overlay.style.display = "none";
+            mainContent.style.display = "block";
+        }, 500); // Match the timeout with the duration of the fade effect
+    });
+});
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
 import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
