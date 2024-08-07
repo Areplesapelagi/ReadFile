@@ -42,24 +42,15 @@
                 <p>Terima kasih.</p>
             </section>
             <section class="buttons">
-                <button id="submit-btn" class="buttons-style"><img src="forms-icon.png" alt="Submit">Submit</button>
                 <button onclick="togglePopup()">Tambah Kehadiran</button>
                 <button onclick="toggleAttendeesPopup()">Lihat Senarai Kehadiran</button>
             </section>
             <section class="container">
-                <h2>Statistik</h2>
-                <p><strong>Total Going:</strong> <span id="total-going">0</span></p>
-                <p><strong>Total Not Going:</strong> <span id="total-not-going">0</span></p>
+                <p><strong>Going:</strong> <span id="total-going">0</span></p>
+                <p><strong>Not Going:</strong> <span id="total-not-going">0</span></p>
                 <p><strong>Total Pax:</strong> <span id="total-pax">0</span></p>
             </section>
         </main>
-
-        <div class="navbar">
-            <button id="contact-btn" class="nav-button"><img src="phone-icon.png" alt="Contact"></button>
-            <button id="location-btn" class="nav-button"><img src="location-icon.png" alt="Location"></button>
-            <button id="comment-btn" class="nav-button"><img src="comment-icon.png" alt="Comment"></button>
-        </div>
-
         <!-- Popup Form -->
         <div id="popup" class="popup">
             <div class="popup-content">
@@ -97,6 +88,11 @@
         </div>
 
         <footer>
+              <div class="navbar">
+            <button id="contact-btn" class="nav-button"><img src="phone-icon.png" alt="Contact"></button>
+            <button id="location-btn" class="nav-button"><img src="location-icon.png" alt="Location"></button>
+            <button id="comment-btn" class="nav-button"><img src="comment-icon.png" alt="Comment"></button>
+        </div>
             <p>Direka Oleh</p>
             <p>Muhd Ariff Bin Hazmi</p>
         </footer>
