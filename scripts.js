@@ -147,14 +147,12 @@ async function loadComments() {
     commentsContainer.innerHTML = '';
 
     try {
-        const querySnapshot = await getDocs(collection(db, 'comments'));
+        const querySnapshot = await getDocs(collection(db, 'attendees'));
         querySnapshot.forEach((doc) => {
             const data = doc.data();
             const commentHTML = `
                 <div>
-                    <h3>${data.name}</h3>
-                    <p><strong>Comment:</strong> ${data.comment}</p>
-                    <p><em>${new Date(data.timestamp?.seconds * 1000).toLocaleString()}</em></p>
+                    <p><strong>Comment:</strong> ${data.comment || 'N/A'}</p>
                 </div>
             `;
             commentsContainer.innerHTML += commentHTML;
