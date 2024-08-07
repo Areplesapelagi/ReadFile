@@ -57,7 +57,7 @@ async function loadAttendees() {
     const totalPaxElem = document.getElementById('total-pax');
 
     goingContainer.innerHTML = '';
-    notgoingContainer.innerHTML = '';
+    notGoingContainer.innerHTML = '';
    
     let totalGoing = 0;
     let totalNotGoing = 0;
