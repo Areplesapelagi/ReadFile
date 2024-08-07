@@ -19,6 +19,37 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// Toggle popup visibility for Add Attendee
+function togglePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// Toggle popup visibility for Attendees List
+function toggleAttendeesPopup() {
+    const attendeesPopup = document.getElementById('attendees-popup');
+    attendeesPopup.style.display = attendeesPopup.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// Toggle popup visibility for Contact
+function toggleContactPopup() {
+    const contactPopup = document.getElementById('contact-popup');
+    contactPopup.style.display = contactPopup.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// Toggle popup visibility for Location
+function toggleLocationPopup() {
+    const locationPopup = document.getElementById('location-popup');
+    locationPopup.style.display = locationPopup.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// Toggle popup visibility for Comments
+function toggleCommentsPopup() {
+    const commentsPopup = document.getElementById('comments-popup');
+    commentsPopup.style.display = commentsPopup.style.display === 'flex' ? 'none' : 'flex';
+}
+
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
 import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
