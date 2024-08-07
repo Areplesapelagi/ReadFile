@@ -16,9 +16,9 @@
     </div>
 
     <div id="main-content">
-        <header>
-        </header>
+        <header></header>
         <main>
+            <!-- Invitation Section -->
             <section class="invitation">
                 <h2>السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</h2>
                 <p>Hazmi Bin Zainol</p>
@@ -51,7 +51,8 @@
                 <p><strong>Total Pax:</strong> <span id="total-pax">0</span></p>
             </section>
         </main>
-        <!-- Popup Form -->
+        
+        <!-- Popup for Adding Attendees -->
         <div id="popup" class="popup">
             <div class="popup-content">
                 <button class="close-btn" onclick="togglePopup()">Close</button>
@@ -87,12 +88,49 @@
             </div>
         </div>
 
-        <footer>
-              <div class="navbar">
-            <button id="contact-btn" class="nav-button"><img src="phone-icon.png" alt="Contact"></button>
-            <button id="location-btn" class="nav-button"><img src="location-icon.png" alt="Location"></button>
-            <button id="comment-btn" class="nav-button"><img src="comment-icon.png" alt="Comment"></button>
+        <!-- Contact Popup -->
+        <div id="contact-popup" class="popup">
+            <div class="popup-content">
+                <button class="close-btn" onclick="toggleContactPopup()">Close</button>
+                <h2>Contact</h2>
+                <p>Name: Muhd Ariff Bin Hazmi</p>
+                <p>WhatsApp: <a href="https://wa.me/60123456789">Chat on WhatsApp</a></p>
+                <p>Phone: <a href="tel:+60123456789">+60123456789</a></p>
+            </div>
         </div>
+
+        <!-- Location Popup -->
+        <div id="location-popup" class="popup">
+            <div class="popup-content">
+                <button class="close-btn" onclick="toggleLocationPopup()">Close</button>
+                <h2>Location</h2>
+                <p>Hotel Nearby: <a href="https://www.examplehotel.com">Example Hotel</a></p>
+                <p>Google Maps: <a href="https://maps.google.com/?q=Space+U8+Mall">View on Google Maps</a></p>
+                <p>Waze: <a href="https://waze.com/ul?q=Space+U8+Mall">View on Waze</a></p>
+            </div>
+        </div>
+
+        <!-- Comments Popup -->
+        <div id="comments-popup" class="popup">
+            <div class="popup-content">
+                <button class="close-btn" onclick="toggleCommentsPopup()">Close</button>
+                <h2>Comments</h2>
+                <div class="popup-scrollable" id="comments-list"></div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="navbar">
+                <button id="contact-btn" class="nav-button" onclick="toggleContactPopup()">
+                    <img src="phone-icon.png" alt="Contact">
+                </button>
+                <button id="location-btn" class="nav-button" onclick="toggleLocationPopup()">
+                    <img src="location-icon.png" alt="Location">
+                </button>
+                <button id="comment-btn" class="nav-button" onclick="toggleCommentsPopup()">
+                    <img src="comment-icon.png" alt="Comment">
+                </button>
+            </div>
             <p>Direka Oleh</p>
             <p>Muhd Ariff Bin Hazmi</p>
         </footer>
@@ -100,6 +138,27 @@
 
     <!-- Inline Script for Popup Functionality -->
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const overlay = document.getElementById("overlay");
+            const mainContent = document.getElementById("main-content");
+            const openButton = document.getElementById("open-button");
+
+            // Ensure the overlay is visible and the main content is hidden on page load
+            overlay.style.display = "flex";
+            mainContent.style.display = "none";
+
+            openButton.addEventListener("click", function() {
+                overlay.style.transition = "opacity 0.5s ease"; // Apply a transition for the fade effect
+                overlay.style.opacity = "0"; // Start the fade out effect
+
+                // Wait for the transition to complete before hiding the overlay and showing the main content
+                setTimeout(function() {
+                    overlay.style.display = "none";
+                    mainContent.style.display = "block";
+                }, 500); // Match the timeout with the duration of the fade effect
+            });
+        });
+
         // Toggle popup visibility for Add Attendee
         function togglePopup() {
             const popup = document.getElementById('popup');
@@ -110,6 +169,24 @@
         function toggleAttendeesPopup() {
             const attendeesPopup = document.getElementById('attendees-popup');
             attendeesPopup.style.display = attendeesPopup.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Toggle popup visibility for Contact
+        function toggleContactPopup() {
+            const contactPopup = document.getElementById('contact-popup');
+            contactPopup.style.display = contactPopup.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Toggle popup visibility for Location
+        function toggleLocationPopup() {
+            const locationPopup = document.getElementById('location-popup');
+            locationPopup.style.display = locationPopup.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Toggle popup visibility for Comments
+        function toggleCommentsPopup() {
+            const commentsPopup = document.getElementById('comments-popup');
+            commentsPopup.style.display = commentsPopup.style.display === 'flex' ? 'none' : 'flex';
         }
     </script>
 
