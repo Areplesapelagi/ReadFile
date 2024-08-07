@@ -3,58 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendees List</title>
+    <title>Majlis Perkahwinan Ariff dan Aini</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Attendees List</h1>
-    <div class="container">
-        <h2>Statistics</h2>
-        <p><strong>Total Going:</strong> <span id="total-going">0</span></p>
-        <p><strong>Total Not Going:</strong> <span id="total-not-going">0</span></p>
-        <p><strong>Total Pax:</strong> <span id="total-pax">0</span></p>
-    </div>
-
-    <!-- Popup Form -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <button class="close-btn" onclick="togglePopup()">Close</button>
-            <h2>Add Attendee</h2>
-            <form id="attendee-form-popup">
-                <label for="name-popup">Name:</label>
-                <input type="text" id="name-popup" name="name" required><br><br>
-                <label for="pax-popup">Pax:</label>
-                <input type="number" id="pax-popup" name="pax" required><br><br>
-                <label for="status-popup">Status:</label>
-                <select id="status-popup" name="status" required>
-                    <option value="Going">Going</option>
-                    <option value="Not Going">Not Going</option>
-                </select><br><br>
-                <label for="comment-popup">Comment:</label>
-                <textarea id="comment-popup" name="comment" rows="4" cols="50"></textarea><br><br>
-                <button type="submit">Submit</button>
-            </form>
+    <div id="overlay">
+        <div class="overlay-content">
+            <h2>UNDANGAN WALIMATUL URUS</h2>
+            <h3>Ariff & Aini</h3>
+            <button id="open-button">Buka</button>
         </div>
     </div>
 
-    <!-- Popup for Attendees List -->
-    <div id="attendees-popup" class="popup">
-        <div class="popup-content">
-            <button class="close-btn" onclick="toggleAttendeesPopup()">Close</button>
-            <h2>Attendees List</h2>
-            <div class="popup-scrollable">
-                <h3>Going</h3>
-                <div id="going-attendees"></div>
-                <h3>Not Going</h3>
-                <div id="not-going-attendees"></div>
+    <div id="main-content">
+        <header>
+        </header>
+        <main>
+            <section class="invitation">
+                <h2>السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</h2>
+                <p>Hazmi Bin Zainol</p>
+                <p>&</p>
+                <p>Zarina Binti Ahmad</p>
+                <p>Diiringi penuh rasa kesyukuran ke hadrat ilahi,</p>
+                <p>sukacitanya kami mengundang</p>
+                <p>Dato' | Datin | Tuan | Puan | Encik | Cik</p>
+                <p>ke majlis perkahwinan anakanda kami</p>
+                <h3>Muhd Ariff Bin Hazmi ♡ Aini Hidanah Hayani Binti Nor Faizal</h3>
+                <p><strong>TEMPAT</strong><br>
+                2-18-G, Space U8 Mall, 6, Persiaran Pasak Bumi, Bukit Jelutong, 40150 Shah Alam, Selangor</p>
+                <p><strong>TARIKH</strong><br>
+                Ahad, 2 Februari 2025</p>
+                <p><strong>MASA</strong><br>
+                11:30 AM - 4:00 PM</p>
+            </section>
+            <section>
+                <p><strong>Diminta Dato' | Datin | Tuan | Puan | Encik | Cik</strong></p>
+                <p><strong>Untuk mengisi form berkenaan bagi memudahkan semua pihak</strong></p>
+                <p>Terima kasih.</p>
+            </section>
+            <section class="buttons">
+                <button id="submit-btn" class="buttons-style"><img src="forms-icon.png" alt="Submit">Submit</button>
+                <button onclick="togglePopup()">Tambah Kehadiran</button>
+                <button onclick="toggleAttendeesPopup()">Lihat Senarai Kehadiran</button>
+            </section>
+            <section class="container">
+                <h2>Statistik</h2>
+                <p><strong>Total Going:</strong> <span id="total-going">0</span></p>
+                <p><strong>Total Not Going:</strong> <span id="total-not-going">0</span></p>
+                <p><strong>Total Pax:</strong> <span id="total-pax">0</span></p>
+            </section>
+        </main>
+
+        <div class="navbar">
+            <button id="contact-btn" class="nav-button"><img src="phone-icon.png" alt="Contact"></button>
+            <button id="location-btn" class="nav-button"><img src="location-icon.png" alt="Location"></button>
+            <button id="comment-btn" class="nav-button"><img src="comment-icon.png" alt="Comment"></button>
+        </div>
+
+        <!-- Popup Form -->
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <button class="close-btn" onclick="togglePopup()">Close</button>
+                <h2>Add Attendee</h2>
+                <form id="attendee-form-popup">
+                    <label for="name-popup">Name:</label>
+                    <input type="text" id="name-popup" name="name" required><br><br>
+                    <label for="pax-popup">Pax:</label>
+                    <input type="number" id="pax-popup" name="pax" required><br><br>
+                    <label for="status-popup">Status:</label>
+                    <select id="status-popup" name="status" required>
+                        <option value="Going">Going</option>
+                        <option value="Not Going">Not Going</option>
+                    </select><br><br>
+                    <label for="comment-popup">Comment:</label>
+                    <textarea id="comment-popup" name="comment" rows="4" cols="50"></textarea><br><br>
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <button onclick="togglePopup()">Add Attendee</button>
-        <button onclick="toggleAttendeesPopup()">View Attendees List</button>
+        <!-- Popup for Attendees List -->
+        <div id="attendees-popup" class="popup">
+            <div class="popup-content">
+                <button class="close-btn" onclick="toggleAttendeesPopup()">Close</button>
+                <h2>Attendees List</h2>
+                <div class="popup-scrollable">
+                    <h3>Going</h3>
+                    <div id="going-attendees"></div>
+                    <h3>Not Going</h3>
+                    <div id="not-going-attendees"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Direka Oleh</p>
+            <p>Muhd Ariff Bin Hazmi</p>
+        </footer>
     </div>
 
     <!-- Inline Script for Popup Functionality -->
