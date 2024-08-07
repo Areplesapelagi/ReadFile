@@ -146,6 +146,27 @@ async function loadAttendees() {
         console.error('Error fetching documents: ', error);
     }
 }
+async function loadComments() {
+    const commentsContainer = document.getElementById('comments-list');
 
+    commentsContainer.innerHTML = '';
+
+    try {
+        const querySnapshot = await getDocs(collection(db, 'comments'));
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const commentHTML = `
+                <div>
+                    <h3>${data.name}</h3>
+                    <p><strong>Comment:</strong> ${data.comment}</p>
+                    <p><em>${new Date(data.timestamp?.seconds * 1000).toLocaleString()}</em></p>
+                </div>
+            `;
+            commentsContainer.innerHTML += commentHTML;
+        });
+    } catch (error) {
+        console.error('Error fetching comments: ', error);
+    }
+}
 // Initial load
 loadAttendees();
