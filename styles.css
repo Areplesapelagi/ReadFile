@@ -1,20 +1,145 @@
 /* General Styles */
 body {
-    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f0f0f5;
+    color: #333;
+    text-align: center; /* Center-align text */
     padding: 0;
-    font-family: Arial, sans-serif;
+    margin: 0;
     display: flex;
     flex-direction: column;
+    align-items: center; /* Center-align content */
+}
+
+/* Main Content Container */
+#main-content {
+    display: none; /* Initially hide main content */
+    width: 100%;
+    max-width: 900px; /* Limit the width for better readability */
+    margin: 0 auto; /* Center the content horizontally */
+    padding-bottom: 60px; /* Ensure space for the sticky navbar */
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
     text-align: center;
 }
 
-/* Container for the content */
-.container {
-    width: 90%;
-    max-width: 400px; /* Adjusts the width to fit a phone screen */
+/* Header Section */
+header {
+    width: 100%;
+    max-width: 900px; /* Same as #main-content */
+    margin: 0 auto; /* Center the header */
+    padding: 20px 0; /* Adjust padding as needed */
+    align-items: center;
+    text-align: center;
+}
+
+/* Overlay Styles */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items horizontally */
+}
+
+.overlay-content h2 {
+    font-size: 2em;
+    color: #5c5c8a;
+}
+
+.overlay-content h3 {
+    font-size: 1.5em;
+    color: #7f7f99;
+}
+
+.overlay-content button {
+    background-color: #5c5c8a;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    margin: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.3s, background-color 0.3s;
+    align-items: center;
+}
+
+.overlay-content button:hover {
+    background-color: #4a4a70;
+    transform: scale(1.05);
+}
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #5c5c8a;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 999;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-button img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+/* Buttons Styles */
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0; /* Adjust the margin as needed */
+}
+
+.buttons-style {
+    background: none;
+    border: 1px solid #5c5c8a;
+    color: #5c5c8a;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-end; /* Align text to the bottom of the image */
+    justify-content: center; /* Center the content horizontally */
+    margin: 10px;
+    text-align: center; /* Align text to the left */
+}
+
+.buttons-style img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px; /* Space between image and text */
+    vertical-align: bottom; /* Ensure image aligns with text at the bottom */
 }
 
 /* Popup Styles */
@@ -58,6 +183,7 @@ body {
     margin-bottom: 10px;
 }
 
+/* Footer Styles */
 .footer {
     position: fixed;
     bottom: 0;
@@ -88,4 +214,63 @@ h1, h2, p {
 
 h3 {
     margin: 10px 0;
+}
+
+/* Popup for general information */
+#popup-info {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 90%;
+    max-width: 300px;
+    padding: 20px;
+}
+
+#popup-info .popup-content {
+    position: relative;
+}
+
+#close-popup-info {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+#popup-text-info {
+    text-align: left;
+    color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .overlay-content h2 {
+        font-size: 1.5em;
+    }
+
+    .overlay-content h3 {
+        font-size: 1.2em;
+    }
+
+    .overlay-content button {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .nav-button {
+        font-size: 0.9em;
+    }
+
+    .nav-button img {
+        width: 20px;
+        height: 20px;
+    }
 }
