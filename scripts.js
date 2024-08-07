@@ -95,6 +95,7 @@ document.getElementById('attendee-form-popup').addEventListener('submit', async 
     }
 });
 
+
 // Load attendees from Firestore
 async function loadAttendees() {
     const goingContainer = document.getElementById('going-attendees');
